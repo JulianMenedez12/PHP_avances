@@ -1,14 +1,14 @@
 <?php
-echo 'Hola';
+echo 'Hola';//impresión 
 function consulta(){
-    $salida=0;
-    $salida=10*2/2;
+    $salida=0;//inicializacion de variable
+    $salida=10*2/2;//revaloramos de la varible
     
-    return $salida;
+    return $salida;//retorno de la variable
 }
 function comer(){
-    $salida=0;
-    $salida=4*4;
+    $salida=0;//inicializacion de variable
+    $salida=4*4;//revaloramos de la varible
 
-    return $salida;
+    return $salida;//retorno de la variable
 }
