@@ -78,12 +78,39 @@ function UpdtSite($sitio, $id_user){
 }
 function MostrarSite($id_user){
     $salida='';
+    $web='';
     $conexion = mysqli_connect('127.0.0.1', 'root', 'root', 'facturas');
     $sql = "SELECT (sitio) as sitio from usuario where id_user='$id_user'";
     $r=$conexion->query($sql);//almacena los datos obtenidos de la base de datos en una variable
     //navega en las filas obtenidas
     while($fila=mysqli_fetch_assoc($r)){
-        $salida = $fila['sitio'];//almacena datos en la variable
+        $web=$fila['sitio'];
+        $salida="<a href='".$web."'>ir a el sitio</a>";
 }
 return $salida;
+}
+function updtlink($id_user,$link){
+    $salida='';
+    $resul='';
+    $result='';
+    $web='';
+    $conexion = mysqli_connect('127.0.0.1', 'root', 'root', 'facturas');
+    $sql = "SELECT (sitio) as sitio from usuario where id_user='$id_user'";
+    $sql1="UPDATE usuario SET invitacion='$link' WHERE id_user='$id_user'";
+    $resul==$conexion->query($sql1);
+    $sql2="SELECT invitacion from usuario where id_user=$id_user'";
+    $result==$conexion->query($sql2);
+    while($fila=mysqli_fetch_array($result)){
+        $link=$fila[0];
+    $r=$conexion->query($sql);//almacena los datos obtenidos de la base de datos en una variable
+    //navega en las filas obtenidas
+    while($fila=mysqli_fetch_assoc($r)){
+        $web=$fila['sitio'];
+        $salida="<a href='".$web."'>";
+        $salida.="$link";
+        $salida.="</a>";
+}
+return $salida;
+}
+
 }
