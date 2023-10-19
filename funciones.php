@@ -38,7 +38,52 @@ function contar_usuarios(){
 }
 function insertar_personas($id,$nombre,$edad,$tel,$id_pais){
     $conexion = mysqli_connect('127.0.0.1', 'root', 'root', 'facturas');//conecta con la base de datos
-    $sql = "INSERT INTO usuario VALUES ('$id','$nombre','$edad','$tel','$id_pais')";
-    $r=$conexion->query($sql);
+    $sql = "INSERT INTO usuario VALUES ('$id','$nombre','$edad','$tel','$id_pais')";//Orden a ejecutar en la base de datos
+    $r=$conexion->query($sql);//Ejecuta la orden en la base de datos
+    return;//return null
+}
+function borrarUserBETA($id_user){
+    $conexion = mysqli_connect('127.0.0.1', 'root', 'root', 'facturas');//conecta con la base de datos
+    $sql="delete from usuario where id_user='$id_user'";//Orden a ejecutar en la base de datos
+    $r=$conexion->query($sql);//Ejecuta la orden en la base de datos
     return;
+}
+
+function borrarUsuario($id_user){
+    $conexion = mysqli_connect('127.0.0.1', 'root', 'root', 'facturas');//conexion con la DATABASE
+    $sql = "DELETE FROM usuario WHERE id_user = '$id_user'";//consulta sql 
+    
+    if(mysqli_query($conexion, $sql)){
+        if(mysqli_affected_rows($conexion) > 0){
+            return "Usuario eliminado correctamente. ";
+        } else {
+            return "No se encontró ningún usuario con ese ID. ";
+        }
+    }
+}
+
+function UpdtSite($sitio, $id_user){
+    $conexion = mysqli_connect('127.0.0.1', 'root', 'root', 'facturas');
+    $sql = "UPDATE usuario SET sitio='$sitio' WHERE id_user='$id_user'";
+    
+    if(mysqli_query($conexion, $sql)){
+        if(mysqli_affected_rows($conexion) > 0){
+            return "Se actualizó el sitio correctamente";
+        } else {
+            return "No se encontró ningún usuario con ese ID   ";
+        }
+    } else {
+        return "Hubo un error al actualizar";
+    }
+}
+function MostrarSite($id_user){
+    $salida='';
+    $conexion = mysqli_connect('127.0.0.1', 'root', 'root', 'facturas');
+    $sql = "SELECT (sitio) as sitio from usuario where id_user='$id_user'";
+    $r=$conexion->query($sql);//almacena los datos obtenidos de la base de datos en una variable
+    //navega en las filas obtenidas
+    while($fila=mysqli_fetch_assoc($r)){
+        $salida = $fila['sitio'];//almacena datos en la variable
+}
+return $salida;
 }
